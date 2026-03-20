@@ -9,7 +9,8 @@
 			"userUid": "automatic",
 			"userGid": "automatic",
 			"upgradePackages": true
-		}
+		},
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {}
 	},
 	"containerUser": "vscode",
 	"runArgs": [
