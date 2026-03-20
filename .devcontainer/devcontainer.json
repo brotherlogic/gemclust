@@ -11,10 +11,6 @@
 			"upgradePackages": true
 		}
 	},
-	"runArgs": [
-		"--userns=keep-id",
-		"--security-opt=label=disable"
-	],
 	"containerUser": "vscode",
 	"updateRemoteUserUID": false,
 	"customizations": {
