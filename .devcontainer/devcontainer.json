@@ -12,6 +12,9 @@
 		}
 	},
 	"containerUser": "vscode",
+	"runArgs": [
+		"--security-opt=label=disable"
+	],
 	"updateRemoteUserUID": true,
 	"customizations": {
 		"vscode": {
