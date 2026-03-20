@@ -1,0 +1,25 @@
+name: Auto Create Pull Request
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - master
+
+jobs:
+  auto-pull-request:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # The --fill flag automatically uses the last commit message for the PR title and body.
+          # We catch the failure if a PR already exists for the branch so the workflow doesn't fail.
+          gh pr create -B main -H ${{ github.ref_name }} --fill || echo "Pull request already exists or could not be created."
