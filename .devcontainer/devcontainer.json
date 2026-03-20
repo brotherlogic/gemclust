@@ -12,7 +12,7 @@
 		}
 	},
 	"containerUser": "vscode",
-	"updateRemoteUserUID": false,
+	"updateRemoteUserUID": true,
 	"customizations": {
 		"vscode": {
 			"settings": {
