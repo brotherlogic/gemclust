@@ -2,9 +2,6 @@ name: Validate Cluster
 
 on:
   pull_request:
-    paths:
-      - 'my-cluster/**'
-      - 'clusters/**'
 
 jobs:
   validate:
