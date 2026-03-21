@@ -37,6 +37,7 @@ flux bootstrap github \
   --repository="${GITHUB_REPO}" \
   --branch="${BRANCH}" \
   --path="${CLUSTER_PATH}" \
+  --toleration-keys="node-role.kubernetes.io/master,node-role.kubernetes.io/control-plane" \
   --personal
 
 echo "✅ Flux bootstrap complete! Your cluster is now synced with the ${GITHUB_REPO} repository."
