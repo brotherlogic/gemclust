@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sale-description-generator
+  namespace: sale-description-generator
+  labels:
+    app: sale-description-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sale-description-generator
+  template:
+    metadata:
+      labels:
+        app: sale-description-generator
+    spec:
+      containers:
+      - name: sale-description-generator
+        image: ghcr.io/brotherlogic/sale-description-generator:main
+        ports:
+        - containerPort: 50051
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
