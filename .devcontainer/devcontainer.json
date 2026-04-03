@@ -20,7 +20,7 @@
 	"mounts": [
 		"source=${localEnv:HOME}/.kube,target=/home/vscode/.kube-localhost,type=bind,readonly"
 	],
-	"postCreateCommand": "curl -s https://fluxcd.io/install.sh | sudo bash",
+	"postCreateCommand": "curl -s https://fluxcd.io/install.sh | sudo bash && git config --global user.email 'brotherlogic-automation@gmail.com' && git config --global user.name 'Brotherlogic Automation'",
 	"postStartCommand": "mkdir -p ~/.kube && cp -a ~/.kube-localhost/. ~/.kube/ 2>/dev/null || true",
 	"customizations": {
 		"vscode": {
