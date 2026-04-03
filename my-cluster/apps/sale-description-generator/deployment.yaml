@@ -20,6 +20,12 @@ spec:
         image: ghcr.io/brotherlogic/sale-description-generator:main
         ports:
         - containerPort: 50051
+        env:
+        - name: GEMINI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: gemini-api-key
+              key: GEMINI_API_KEY
         resources:
           limits:
             cpu: 500m
