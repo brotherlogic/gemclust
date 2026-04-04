@@ -37,7 +37,8 @@ flux bootstrap github \
   --repository="${GITHUB_REPO}" \
   --branch="${BRANCH}" \
   --path="${CLUSTER_PATH}" \
-  --personal \
-  --components-extra=image-reflector-controller,image-automation-controller
+  --components-extra=image-reflector-controller,image-automation-controller \
+  --personal
 
 echo "✅ Flux bootstrap complete! Your cluster is now synced with the ${GITHUB_REPO} repository."
+
