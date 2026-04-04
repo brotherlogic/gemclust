@@ -44,4 +44,3 @@ spec:
   update:
     path: ./my-cluster/apps/sale-description-generator
     strategy: Setters
-
