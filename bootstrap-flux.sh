@@ -26,6 +26,7 @@ if [[ -z "${GITHUB_TOKEN}" ]]; then
 fi
 
 echo "🚀 Bootstrapping Flux to the cluster..."
+echo "Flux CLI version: $(flux --version)"
 echo "Owner:      ${GITHUB_USER}"
 echo "Repository: ${GITHUB_REPO}"
 echo "Branch:     ${BRANCH}"
@@ -39,6 +40,7 @@ flux bootstrap github \
   --path="${CLUSTER_PATH}" \
   --components-extra=image-reflector-controller,image-automation-controller \
   --personal
+  --read-write-key
 
 echo "✅ Flux bootstrap complete! Your cluster is now synced with the ${GITHUB_REPO} repository."
 
