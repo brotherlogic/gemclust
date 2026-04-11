@@ -1,0 +1,7 @@
+talos/
+*.yaml
+*.yml
+!my-cluster/**/*.yaml
+!my-cluster/**/*.yml
+!**/deployment.yaml
+!.github/**/*.yml
