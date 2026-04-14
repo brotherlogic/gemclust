@@ -1,6 +1,7 @@
 {
 	"name": "Ubuntu",
 	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+	"workspaceFolder": "/workspaces/gemclust",
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"installZsh": true,
