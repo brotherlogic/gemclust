@@ -6,3 +6,5 @@ tic -x ghostty.terminfo
 
 # Install tmux and emacs
 sudo apt-get update && sudo apt-get install -y emacs
+
+sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
