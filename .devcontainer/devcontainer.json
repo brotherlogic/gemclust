@@ -19,7 +19,7 @@
 	],
 	"updateRemoteUserUID": true,
 	"mounts": [
-	    "source=${localEnv:HOME}/.aikube,target=/home/vscode/.kube-localhost,type=bind,readonly",
+	    #"source=${localEnv:HOME}/.aikube,target=/home/vscode/.kube-localhost,type=bind,readonly",
         {
             "source": "${localEnv:HOME}/.ssh",
             "target": "/home/vscode/.ssh", // Adjust "vscode" to your container's non-root user (e.g., "node", "user")
