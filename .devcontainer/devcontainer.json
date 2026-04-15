@@ -26,7 +26,7 @@
 			"options": "readonly" // Optional: makes keys read-only in container
 		},
 		{
-			"source": "${localEnv:HOME}/.talos/kubeconfig",
+			"source": "${localEnv:HOME}/talos/kubeconfig",
 			"target": "/home/vscode/.kube/config",
 			"type": "bind",
 			"options": "readonly"
