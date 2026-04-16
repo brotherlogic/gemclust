@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: sale-description-generator
-        image: ghcr.io/brotherlogic/sale-description-generator:0.2.6 # {"$imagepolicy": "sale-description-generator:sale-description-generator"}
+        image: ghcr.io/brotherlogic/sale-description-generator:0.2.7 # {"$imagepolicy": "sale-description-generator:sale-description-generator"}
         ports:
         - containerPort: 50051
         env:
