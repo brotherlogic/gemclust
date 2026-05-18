@@ -19,8 +19,8 @@ talosctl gen config gemclust "https://${CP_IP}:6443" --output-dir talos/ --force
 echo "Applying control plane configuration to ${CP_IP}..."
 talosctl apply-config --insecure --nodes "${CP_IP}" --file talos/controlplane.yaml
 
-echo "Waiting for control plane to settle (30s)..."
-sleep 30
+echo "Waiting for control plane to settle (2m)..."
+sleep 120
 
 echo "Bootstrapping the cluster..."
 talosctl bootstrap --nodes "${CP_IP}" --endpoints "${CP_IP}" --talosconfig talos/talosconfig
