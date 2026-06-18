@@ -5,7 +5,7 @@ git config --global user.name 'Brotherlogic Automation'
 tic -x ghostty.terminfo
 
 # Install tmux and emacs
-sudo apt-get update && sudo apt-get install -y emacs
+sudo apt-get install -y emacs tmux
 
 sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
 
