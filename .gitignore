@@ -5,3 +5,4 @@ talos/
 !my-cluster/**/*.yml
 !**/deployment.yaml
 !.github/**/*.yml
+.devcontainer/.env.auth

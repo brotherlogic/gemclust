@@ -3,24 +3,25 @@
 set -e
 
 if [ "$#" -lt 1 ]; then
-    echo "Usage: $0 <CONTROL_PLANE_IP> [WORKER_IP_1] [WORKER_IP_2] ..."
+    echo "Usage: [INSTALL_DISK=/dev/nvme0n1] $0 <CONTROL_PLANE_IP> [WORKER_IP_1] [WORKER_IP_2] ..."
     exit 1
 fi
 
 CP_IP=$1
 shift
 WORKER_IPS=$@
+INSTALL_DISK=${INSTALL_DISK:-/dev/nvme0n1}
 
 mkdir -p talos
 
-echo "Generating Talos configurations..."
-talosctl gen config gemclust "https://${CP_IP}:6443" --output-dir talos/ --force
+echo "Generating Talos configurations for disk ${INSTALL_DISK}..."
+talosctl gen config gemclust "https://${CP_IP}:6443" --output-dir talos/ --install-disk "${INSTALL_DISK}" --force
 
 echo "Applying control plane configuration to ${CP_IP}..."
 talosctl apply-config --insecure --nodes "${CP_IP}" --file talos/controlplane.yaml
 
-echo "Waiting for control plane to settle (30s)..."
-sleep 30
+echo "Waiting for control plane to settle (2m)..."
+sleep 120
 
 echo "Bootstrapping the cluster..."
 talosctl bootstrap --nodes "${CP_IP}" --endpoints "${CP_IP}" --talosconfig talos/talosconfig
