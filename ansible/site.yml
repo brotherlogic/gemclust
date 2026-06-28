@@ -1,0 +1,19 @@
+---
+- name: Apply common configuration to all nodes
+  hosts: all
+  become: yes
+  roles:
+    - common
+
+- name: Configure Devcontainer Server
+  hosts: dev_servers
+  become: yes
+  roles:
+    - docker
+    - devcontainer_manager
+
+- name: Configure LLM Server
+  hosts: llm_servers
+  become: yes
+  roles:
+    - ollama

@@ -1,0 +1,30 @@
+---
+- name: Download and install Ollama
+  shell: curl -fsSL https://ollama.com/install.sh | sh
+  args:
+    creates: /usr/local/bin/ollama
+
+- name: Create systemd override directory for Ollama
+  file:
+    path: /etc/systemd/system/ollama.service.d
+    state: directory
+    mode: '0755'
+
+- name: Configure Ollama to listen on all interfaces
+  copy:
+    dest: /etc/systemd/system/ollama.service.d/override.conf
+    content: |
+      [Service]
+      Environment="OLLAMA_HOST=0.0.0.0"
+  notify: reload systemd and restart ollama
+
+- name: Ensure Ollama is running
+  systemd:
+    name: ollama
+    state: started
+    enabled: yes
+
+- name: Pull deepseek-coder-v2 model
+  command: ollama pull deepseek-coder-v2
+  register: result
+  changed_when: "'downloading' in result.stdout"

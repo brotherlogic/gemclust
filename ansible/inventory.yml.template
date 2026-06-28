@@ -1,0 +1,12 @@
+all:
+  vars:
+    ansible_user: ubuntu # Change this to the user you create during OS install
+  children:
+    llm_servers:
+      hosts:
+        framework_desktop:
+          ansible_host: 192.168.1.100 # Replace with actual IP
+    dev_servers:
+      hosts:
+        intel_nuc:
+          ansible_host: 192.168.1.101 # Replace with actual IP
