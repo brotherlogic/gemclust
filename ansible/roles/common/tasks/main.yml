@@ -13,6 +13,7 @@
       - rsync
       - vim
       - golang-go
+      - gh
     state: present
 
 - name: Install chezmoi
