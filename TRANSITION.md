@@ -20,7 +20,8 @@ Before touching your existing setup on the Framework Desktop, we will prepare th
    - Run the setup playbook: `ansible-playbook -i ansible/inventory.yml ansible/site.yml --limit dev_servers`
    *(This will automatically install Docker, clone `devcontainer-manager`, and install basic utilities like `gh`).*
 5. **Configure GitHub CLI (`gh`):**
-   - Run `gh auth login` on the Intel NUC to authenticate with GitHub. This is required for cloning private repos and managing deployments seamlessly.
+   - Run `gh auth login` on the Intel NUC to authenticate with GitHub.
+   - **Important:** When prompted, select **SSH** as your preferred protocol for Git operations, and allow `gh` to generate and upload a new SSH key to your GitHub account. This ensures that `devpod` can successfully clone repositories via SSH (e.g., `git@github.com:...`).
 
 ## Phase 2: Migrate `devcontainer-manager`
 
