@@ -27,11 +27,16 @@ Now we will stand up your devcontainers on the new hardware alongside the old ha
    cd ~/devcontainer-manager
    git status
    ```
-2. **Transfer State (If necessary):** If your `devcontainer-manager` relies on any local state, dotfiles, or specific volume mounts on the Framework Desktop, `rsync` those directories over to the Intel NUC.
+2. **Setup Dotfiles:** All dotfiles are managed by chezmoi. Initialize and apply them on the Intel NUC:
+   ```bash
+   chezmoi init --apply brotherlogic
+   ```
+   *(Replace `brotherlogic` with your GitHub username if different, or install chezmoi first if not present).*
+3. **Transfer State (If necessary):** If your `devcontainer-manager` relies on any local state or specific volume mounts on the Framework Desktop (excluding dotfiles), `rsync` those directories over to the Intel NUC.
    ```bash
    rsync -avz user@<Framework-Desktop-IP>:/path/to/data/ /local/path/on/nuc/
    ```
-3. **Spin Up Containers:** Run your `devcontainer-manager` deployment scripts on the Intel NUC to pull the images and spin up your devcontainers on the new hardware. 
+4. **Spin Up Containers:** Run your `devcontainer-manager` deployment scripts on the Intel NUC to pull the images and spin up your devcontainers on the new hardware. 
    - *At this point, you have identical devcontainers running on both the Framework Desktop and the Intel NUC.*
 
 ## Phase 3: Switch the Orchestrator (Cutover)
