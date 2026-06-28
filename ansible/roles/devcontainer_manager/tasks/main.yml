@@ -11,3 +11,12 @@
   args:
     creates: /usr/local/bin/devpod
   become: yes
+
+- name: Add Docker provider to devpod
+  command: devpod provider add docker
+  become: no
+  ignore_errors: yes
+
+- name: Set Docker as default devpod provider
+  command: devpod provider use docker
+  become: no
