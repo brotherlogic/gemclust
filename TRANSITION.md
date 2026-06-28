@@ -11,7 +11,10 @@ Before touching your existing setup on the Framework Desktop, we will prepare th
 3. **Setup SSH Access:** 
    - From your **Framework Laptop Board** (your new day-to-day orchestrator), generate an SSH key if you haven't already (`ssh-keygen`).
    - Copy the public key to the Intel NUC (`ssh-copy-id user@<NUC-IP>`).
-4. **Provision via Ansible:** Use the Ansible scripts in this repository to configure the NUC.
+4. **Install and Configure GitHub CLI (`gh`):**
+   - Install `gh` on the Intel NUC (e.g., via `apt` or by downloading the binary) so that it is available in the `$PATH`.
+   - Run `gh auth login` to authenticate with GitHub. This is required for cloning private repos and managing deployments seamlessly.
+5. **Provision via Ansible:** Use the Ansible scripts in this repository to configure the NUC.
    - Copy `ansible/inventory.yml.template` to `ansible/inventory.yml`.
    - Update `ansible/inventory.yml` with the correct IP and user for the Intel NUC.
    - **Note:** You may need to validate the SSH connection and accept the host key before running Ansible. You can do this by running `ssh-keyscan -H <NUC-IP> >> ~/.ssh/known_hosts` or by SSHing into the machine manually once.
