@@ -20,3 +20,7 @@
   shell: sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
   args:
     creates: /usr/local/bin/chezmoi
+
+- name: Set timezone to Pacific Time
+  timezone:
+    name: America/Los_Angeles
