@@ -11,17 +11,20 @@ Before touching your existing setup on the Framework Desktop, we will prepare th
 3. **Setup SSH Access:** 
    - From your **Framework Laptop Board** (your new day-to-day orchestrator), generate an SSH key if you haven't already (`ssh-keygen`).
    - Copy the public key to the Intel NUC (`ssh-copy-id user@<NUC-IP>`).
-4. **Install Docker:** Run the standard Docker installation on the Intel NUC.
-   - Ensure your user is added to the `docker` group (`sudo usermod -aG docker $USER`).
+4. **Provision via Ansible:** Use the Ansible scripts in this repository to configure the NUC.
+   - Update `ansible/inventory.yml` with the correct IP and user for the Intel NUC.
+   - Confirm Ansible can connect: `ansible dev_servers -m ping -i ansible/inventory.yml`
+   - Run the setup playbook: `ansible-playbook -i ansible/inventory.yml ansible/site.yml --limit dev_servers`
+   *(This will automatically install Docker and clone `devcontainer-manager`).*
 
 ## Phase 2: Migrate `devcontainer-manager`
 
 Now we will stand up your devcontainers on the new hardware alongside the old hardware.
 
-1. **Clone the Manager:** On the **Intel NUC**, clone your management repo:
+1. **Verify the Manager:** On the **Intel NUC**, ensure Ansible successfully cloned your management repo:
    ```bash
-   git clone https://github.com/brotherlogic/devcontainer-manager.git
-   cd devcontainer-manager
+   cd ~/devcontainer-manager
+   git status
    ```
 2. **Transfer State (If necessary):** If your `devcontainer-manager` relies on any local state, dotfiles, or specific volume mounts on the Framework Desktop, `rsync` those directories over to the Intel NUC.
    ```bash
@@ -49,22 +52,10 @@ Once you have verified that your dev workflow is fully operational on the Intel 
    docker system prune -a --volumes
    ```
    *(Optional: You can completely uninstall Docker if you want to keep this machine purely for LLMs).*
-2. **Install Ollama:** Install the Ollama service on the Framework Desktop:
-   ```bash
-   curl -fsSL https://ollama.com/install.sh | sh
-   ```
-3. **Configure Network Binding:** By default, Ollama only listens on `localhost`. You need to expose it to your local network.
-   - Edit the systemd service: `sudo systemctl edit ollama.service`
-   - Add the following under the `[Service]` block:
-     ```ini
-     [Service]
-     Environment="OLLAMA_HOST=0.0.0.0"
-     ```
-   - Restart the service: `sudo systemctl daemon-reload && sudo systemctl restart ollama`
-4. **Pull Models:** Pull your desired coding models:
-   ```bash
-   ollama run deepseek-coder-v2
-   ```
+2. **Provision LLM Server via Ansible:** Use the Ansible scripts to install and configure Ollama.
+   - Update `ansible/inventory.yml` with the IP of the Framework Desktop under `llm_servers`.
+   - Run the setup playbook: `ansible-playbook -i ansible/inventory.yml ansible/site.yml --limit llm_servers`
+   *(This will automatically install Ollama, configure network bindings, and pull the `deepseek-coder-v2` model).*
 
 ## Phase 5: Final Integration
 
