@@ -12,4 +12,5 @@
       - htop
       - rsync
       - vim
+      - chezmoi
     state: present
