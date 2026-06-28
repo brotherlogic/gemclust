@@ -6,3 +6,6 @@ talos/
 !**/deployment.yaml
 !.github/**/*.yml
 .devcontainer/.env.auth
+!ansible/**/*.yml
+!ansible/**/*.yaml
+ansible/inventory.yml

@@ -1,0 +1,7 @@
+---
+- name: Clone devcontainer-manager repository
+  git:
+    repo: https://github.com/brotherlogic/devcontainer-manager.git
+    dest: "/home/{{ ansible_user }}/devcontainer-manager"
+    update: yes
+  become: no
