@@ -11,17 +11,16 @@ Before touching your existing setup on the Framework Desktop, we will prepare th
 3. **Setup SSH Access:** 
    - From your **Framework Laptop Board** (your new day-to-day orchestrator), generate an SSH key if you haven't already (`ssh-keygen`).
    - Copy the public key to the Intel NUC (`ssh-copy-id user@<NUC-IP>`).
-4. **Install and Configure GitHub CLI (`gh`):**
-   - Install `gh` on the Intel NUC (e.g., via `apt` or by downloading the binary) so that it is available in the `$PATH`.
-   - Run `gh auth login` to authenticate with GitHub. This is required for cloning private repos and managing deployments seamlessly.
-5. **Provision via Ansible:** Use the Ansible scripts in this repository to configure the NUC.
+4. **Provision via Ansible:** Use the Ansible scripts in this repository to configure the NUC.
    - Copy `ansible/inventory.yml.template` to `ansible/inventory.yml`.
    - Update `ansible/inventory.yml` with the correct IP and user for the Intel NUC.
    - **Note:** You may need to validate the SSH connection and accept the host key before running Ansible. You can do this by running `ssh-keyscan -H <NUC-IP> >> ~/.ssh/known_hosts` or by SSHing into the machine manually once.
    - Confirm Ansible can connect: `ansible dev_servers -m ping -i ansible/inventory.yml`
    - **Note:** The Ansible playbook requires `sudo` privileges. You can either append the `-K` flag to the `ansible-playbook` command to prompt for the password, or configure passwordless sudo on the remote machine (e.g., `echo "user ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/user && sudo chmod 0440 /etc/sudoers.d/user`).
    - Run the setup playbook: `ansible-playbook -i ansible/inventory.yml ansible/site.yml --limit dev_servers`
-   *(This will automatically install Docker and clone `devcontainer-manager`).*
+   *(This will automatically install Docker, clone `devcontainer-manager`, and install basic utilities like `gh`).*
+5. **Configure GitHub CLI (`gh`):**
+   - Run `gh auth login` on the Intel NUC to authenticate with GitHub. This is required for cloning private repos and managing deployments seamlessly.
 
 ## Phase 2: Migrate `devcontainer-manager`
 
