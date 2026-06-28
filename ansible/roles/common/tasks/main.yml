@@ -24,3 +24,12 @@
 - name: Set timezone to Pacific Time
   timezone:
     name: America/Los_Angeles
+
+- name: Copy ghostty terminfo file
+  copy:
+    src: ghostty.terminfo
+    dest: /tmp/ghostty.terminfo
+
+- name: Compile ghostty terminfo
+  command: tic -x /tmp/ghostty.terminfo
+  changed_when: false
