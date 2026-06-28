@@ -16,6 +16,7 @@ Before touching your existing setup on the Framework Desktop, we will prepare th
    - Update `ansible/inventory.yml` with the correct IP and user for the Intel NUC.
    - **Note:** You may need to validate the SSH connection and accept the host key before running Ansible. You can do this by running `ssh-keyscan -H <NUC-IP> >> ~/.ssh/known_hosts` or by SSHing into the machine manually once.
    - Confirm Ansible can connect: `ansible dev_servers -m ping -i ansible/inventory.yml`
+   - **Note:** The Ansible playbook requires `sudo` privileges. You can either append the `-K` flag to the `ansible-playbook` command to prompt for the password, or configure passwordless sudo on the remote machine (e.g., `echo "user ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/user && sudo chmod 0440 /etc/sudoers.d/user`).
    - Run the setup playbook: `ansible-playbook -i ansible/inventory.yml ansible/site.yml --limit dev_servers`
    *(This will automatically install Docker and clone `devcontainer-manager`).*
 
@@ -62,6 +63,7 @@ Once you have verified that your dev workflow is fully operational on the Intel 
 2. **Provision LLM Server via Ansible:** Use the Ansible scripts to install and configure Ollama.
    - Ensure you have copied `ansible/inventory.yml.template` to `ansible/inventory.yml` and updated it with the IP of the Framework Desktop under `llm_servers`.
    - **Note:** You may need to validate the SSH connection and accept the host key before running Ansible. You can do this by running `ssh-keyscan -H <Framework-Desktop-IP> >> ~/.ssh/known_hosts` or by SSHing into the machine manually once.
+   - **Note:** The Ansible playbook requires `sudo` privileges. You can either append the `-K` flag to the `ansible-playbook` command to prompt for the password, or configure passwordless sudo on the remote machine (e.g., `echo "user ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/user && sudo chmod 0440 /etc/sudoers.d/user`).
    - Run the setup playbook: `ansible-playbook -i ansible/inventory.yml ansible/site.yml --limit llm_servers`
    *(This will automatically install Ollama, configure network bindings, and pull the `deepseek-coder-v2` model).*
 
