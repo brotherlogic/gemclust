@@ -15,7 +15,9 @@
 - name: Add Docker provider to devpod
   command: devpod provider add docker
   become: no
-  ignore_errors: yes
+  register: devpod_add
+  failed_when: devpod_add.rc != 0 and 'already exists' not in devpod_add.stderr
+  changed_when: devpod_add.rc == 0
 
 - name: Set Docker as default devpod provider
   command: devpod provider use docker
